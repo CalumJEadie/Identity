@@ -31,4 +31,25 @@ The previous versions of Identity for MVC5 and lower, previously available on Co
 
 ## Notes
 
+### Versions
+
 On GitHub, 2.1.3 released August 2018 whereas on NuGet latest version is 2.2.2 released July/August 2018, so GitHub and NuGet must refer to different types of version number.
+
+https://github.com/aspnet/Identity/releases
+https://www.nuget.org/packages/Microsoft.AspNet.Identity.Core/
+
+### Security Stamp
+
+How does the security stamp behaviour work?
+
+- `AddIdentity` adds cookie authentication and configures using `CookieAuthenticationOptions`
+- `OnValidatePrincipal` cookie authentication event is used and wired up to a static class `SecurityStampValidator` which then calls through to an instance of `SecurityStampValidator`
+  - https://github.com/CalumJEadie/Identity/blob/studying-2.1.3/src/Identity/IdentityServiceCollectionExtensions.cs#L51
+- The security stamp validator instance is added to the normal scoped DI
+  - https://github.com/CalumJEadie/Identity/blob/studying-2.1.3/src/Identity/IdentityServiceCollectionExtensions.cs#L88
+
+How does cookie authentication work?
+
+- `CookieAuthenticationHandler.HandleAuthenticateAsync` constructs a `CookieValidatePrincipalContext` and trigger the `ValidatePrincipal` event.
+- A refresh of the cookie may be triggered.
+  - https://github.com/CalumJEadie/Security/blob/studying-2.1.2/src/Microsoft.AspNetCore.Authentication.Cookies/CookieAuthenticationHandler.cs#L169
