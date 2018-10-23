@@ -28,3 +28,7 @@ The previous versions of Identity for MVC5 and lower, previously available on Co
  * [ASP.NET Identity Cassandra Provider](https://github.com/lkubis/AspNetCore.Identity.Cassandra)
  * [ASP.NET Identity Firebase Provider](https://github.com/aguacongas/Identity.Firebase)
  * [ASP.NET Identity Redis Provider](https://github.com/aguacongas/Identity.Redis)
+
+## Notes
+
+On GitHub, 2.1.3 released August 2018 whereas on NuGet latest version is 2.2.2 released July/August 2018, so GitHub and NuGet must refer to different types of version number.
