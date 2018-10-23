@@ -89,6 +89,7 @@ namespace Microsoft.AspNetCore.Identity
         protected virtual Task<TUser> VerifySecurityStamp(ClaimsPrincipal principal)
             => SignInManager.ValidateSecurityStampAsync(principal);
 
+        // NOTE: CookieAuthenticationHandler.HandleAuthenticateAsync > SecurityStampValidator.ValidatePrincipalAsync > ValidateAsync
         /// <summary>
         /// Validates a security stamp of an identity as an asynchronous operation, and rebuilds the identity if the validation succeeds, otherwise rejects
         /// the identity.
@@ -103,6 +104,7 @@ namespace Microsoft.AspNetCore.Identity
             {
                 currentUtc = Clock.UtcNow;
             }
+            // QUESTION: What is context.Properties.IssuedUtc and how does it relate to overall expiry of the cookie?
             var issuedUtc = context.Properties.IssuedUtc;
 
             // Only validate if enough time has elapsed
