@@ -305,7 +305,6 @@ namespace IdentitySample.Controllers
             return code == null ? View("Error") : View();
         }
 
-        //
         // POST: /Account/ResetPassword
         [HttpPost]
         [AllowAnonymous]
@@ -316,6 +315,7 @@ namespace IdentitySample.Controllers
             {
                 return View(model);
             }
+            // NOTE: Interestingly, asks the user for their email again.
             var user = await _userManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
